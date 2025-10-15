@@ -1,7 +1,6 @@
-Do some shopping
-Create a statue
-Buy chocolate
-Do the dishes
-Fix the car
-Keep coding
-Master fixer
+My first todo
+My second todo
+My third todo
+My fourth todo
+My fifth todo
+

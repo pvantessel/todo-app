@@ -9,5 +9,6 @@ def get_todos(filepath=FILEPATH):
 
 def write_todos(todos_arg, filepath=FILEPATH):
     """ Writes the to-do items in a text file. """
+    todos_arg = [todo if todo.endswith('\n') else todo + '\n' for todo in todos_arg]
     with open(filepath, 'w') as file:
         file.writelines(todos_arg)
