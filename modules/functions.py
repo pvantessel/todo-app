@@ -12,3 +12,7 @@ def write_todos(todos_arg, filepath=FILEPATH):
     todos_arg = [todo if todo.endswith('\n') else todo + '\n' for todo in todos_arg]
     with open(filepath, 'w') as file:
         file.writelines(todos_arg)
+
+if __name__ == "__main__":
+    test_get_todos = get_todos('../todos.txt')
+    print(test_get_todos)

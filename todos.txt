@@ -1,6 +1,5 @@
-My first todo
-My second todo
-My third todo
-My fourth todo
-My fifth todo
-
+Go shopping
+Do the dishes
+Fix the cars
+Make some noice
+Start walking
