@@ -1,6 +1,10 @@
 from modules import functions
 import FreeSimpleGUI as fsg
+import time
 
+fsg.theme("LightGreen7")
+
+label_clock = fsg.Text("", key="clock")
 label_input = fsg.Text("Type in a To-Do")
 input_field = fsg.InputText(tooltip="Enter a To-Do", key="todo")
 add_button = fsg.Button("Add")
@@ -12,17 +16,16 @@ complete_button = fsg.Button("Complete")
 exit_button = fsg.Button("Exit")
 
 window = fsg.Window("My To-Do App",
-                    layout=[[label_input, input_field, add_button],
+                    layout=[[label_clock],
+                            [label_input, input_field, add_button],
                             [list_box, edit_button, complete_button],
                             [exit_button]],
                     font=("Times New Roman", 20))
 
 while True:
-    event, values = window.read()
-    print(1, event)
-    print(2, values)
-    print(3, values["todo"])
-    print(4, values["todos"])
+    event, values = window.read(timeout=500)
+    window["clock"].update(value=time.strftime("%d %B %Y, %X"))
+
     match event:
         case "Add":
             todos = functions.get_todos()
@@ -32,24 +35,28 @@ while True:
             window["todos"].update(values=todos)
 
         case "Edit":
-            todo_to_edit = values["todos"][0]
-            new_todo = values["todo"]
+            try:
+                todo_to_edit = values["todos"][0]
+                new_todo = values["todo"]
 
-            todos = functions.get_todos()
-            index = todos.index(todo_to_edit)
-            todos[index] = new_todo
-            functions.write_todos(todos)
-            window["todos"].update(values=todos)
+                todos = functions.get_todos()
+                index = todos.index(todo_to_edit)
+                todos[index] = new_todo
+                functions.write_todos(todos)
+                window["todos"].update(values=todos)
+            except IndexError:
+                fsg.popup("Please select a todo to edit", font=("Times New Roman", 20))
 
         case "Complete":
-            #todo_to_complete = values["todos"][0]
-            #todos = functions.get_todos()
-            todo_to_complete = values["todos"][0].strip()
-            todos = [t.strip() for t in functions.get_todos()]
-            todos.remove(todo_to_complete)
-            functions.write_todos(todos)
-            window["todos"].update(values=todos)
-            window["todo"].update(value="")
+            try:
+                todo_to_complete = values["todos"][0].strip()
+                todos = [t.strip() for t in functions.get_todos()]
+                todos.remove(todo_to_complete)
+                functions.write_todos(todos)
+                window["todos"].update(values=todos)
+                window["todo"].update(value="")
+            except IndexError:
+                fsg.popup("Please select a todo to complete", font=("Times New Roman", 20))
 
         case "Exit":
             break
