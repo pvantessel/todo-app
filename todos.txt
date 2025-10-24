@@ -1,6 +1,1 @@
-Go shopping
-Do the dishes
-Fix the door
-Start walking
-Clean the windows
-A new todo
+My first created todo
