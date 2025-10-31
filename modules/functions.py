@@ -1,7 +1,7 @@
 import os
 
 # Dynamic folder in home directory user.
-APP_DIR = os.path.join(os.path.expanduser("~"), "My Todo App")
+APP_DIR = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "My Todo App")
 
 # Complete file path to todos.txt in that folder.
 FILEPATH = os.path.join(APP_DIR, "todos.txt")
